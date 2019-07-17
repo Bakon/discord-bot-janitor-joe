@@ -23,6 +23,13 @@ You can not delete more than 100 at a time because Discord doesn't let you.
 
 ## Commands for everyone!
 
+### `/help`
+Returns a list of available commands
+
+### `/tifu`
+Returns a random post from the new tifu subreddit.
+If given the list parameter it will return a list with 20 links to posts.
+
 ### `/champion`
 Returns a random champion from [League of Legends](https://leagueoflegends.com)<br>
 If given the parameter 'top', 'mid', 'jungle', 'adc' or 'support', it will return champions respectively to those lanes.

@@ -7,7 +7,7 @@ bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
 bot.on('ready', () => {
-  bot.user.setActivity('Janitor simulator', { type: 'PLAYING' })
+  bot.user.setActivity('Janitor simulator || "/help" for help', { type: 'PLAYING' })
     .then(presence => console.log(`${bot.user.username} is online! Activity set to ${presence.game ? presence.game.name : 'none'}`))
      .catch(console.error);
 });
@@ -26,11 +26,10 @@ bot.on('message', async message => {
   let messageArray = message.content.split(' ');
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
+  let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
 
   if (message.author.bot || message.channel.type === 'dm') return;
   if (!message.content.startsWith(prefix)) return;
-
-  let commandFile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
   if (commandFile) commandFile.run(bot, message, args);
 });
 

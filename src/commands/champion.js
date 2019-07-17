@@ -1,6 +1,11 @@
 import Discord from 'discord.js';
 import { Champions } from '../data/champions';
 
+export const config = {
+  name: 'champion',
+  aliases: ['champ']
+};
+
 export const run = async (bot, message, args) => {
   function randomChampion() {
     let suppliedRole = args.slice(0).join(' ');
@@ -32,8 +37,3 @@ export const run = async (bot, message, args) => {
   }
   message.channel.send(randomChampion());
 }
-
-export const config = {
-  name: 'champion',
-  aliases: ['champ']
-};
