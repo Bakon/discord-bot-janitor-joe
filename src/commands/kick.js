@@ -1,34 +1,40 @@
-import Discord from 'discord.js';
-
 export const config = {
   name: 'kick',
-  aliases: []
+  aliases: [],
 };
 
 export const run = async (bot, message, args) => {
   let mentionedUser = message.mentions.users.first();
-  let suppliedReason = args.slice(1).join(' ') || `${message.author.username} did not supply reason.`;
+  let suppliedReason =
+    args.slice(1).join(' ') ||
+    `${message.author.username} did not supply reason.`;
   let kickLog = `${message.author.username}: ${suppliedReason}`;
 
   message.delete(0);
 
   if (!message.member.hasPermission('ADMINISTRATOR')) {
-  message.channel.send(`Sorry ${message.author.username}, but you don't have permission to do that!`)
-  .then(message => {
-      (message).delete(5000);
-    });
-    return;
-  }
-
-  if (!mentionedUser) {
-    message.channel.send(`Sorry ${message.author.username}, I couldn't find that user!`)
-    .then(message => {
-        (message).delete(5000);
+    message.channel
+      .send(
+        `Sorry ${message.author.username}, but you don't have permission to do that!`
+      )
+      .then(message => {
+        message.delete(5000);
       });
     return;
   }
 
-  message.guild.member(mentionedUser).kick(kickLog)
+  if (!mentionedUser) {
+    message.channel
+      .send(`Sorry ${message.author.username}, I couldn't find that user!`)
+      .then(message => {
+        message.delete(5000);
+      });
+    return;
+  }
+
+  message.guild
+    .member(mentionedUser)
+    .kick(kickLog)
     .then(console.log)
-    .catch(console.error)
-}
+    .catch(console.error);
+};

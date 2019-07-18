@@ -3,7 +3,7 @@ export const Champions = {
     'Aatrox',
     'Akali',
     'Camille',
-    'Chogath',
+    "Cho'Gath",
     'Darius',
     'DrMundo',
     'Fiora',
@@ -46,13 +46,13 @@ export const Champions = {
     'Volibear',
     'Yasuo',
     'Yorick',
-    'Qiyana'
-    ],
+    'Qiyana',
+  ],
   jungle: [
     'Aatrox',
     'Amumu',
     'Camille',
-    'Chogath',
+    "Cho'Gath",
     'Ekko',
     'Elise',
     'Evelynn',
@@ -93,7 +93,7 @@ export const Champions = {
     'Warwick',
     'XinZhao',
     'Zac',
-    'Qiyana'
+    'Qiyana',
   ],
   mid: [
     'Aatrox',
@@ -105,7 +105,7 @@ export const Champions = {
     'Azir',
     'Brand',
     'Cassiopeia',
-    'Chogath',
+    "Cho'Gath",
     'Corki',
     'Diana',
     'Ekko',
@@ -148,7 +148,7 @@ export const Champions = {
     'Ziggs',
     'Sylas',
     'Zoe',
-    'Qiyana'
+    'Qiyana',
   ],
   adc: [
     'Ashe',
@@ -196,8 +196,8 @@ export const Champions = {
     'Velkoz',
     'Yuumi',
     'Zilean',
-    'Zyra'
-    ],
+    'Zyra',
+  ],
   any: [
     'Aatrox',
     'Ahri',
@@ -216,7 +216,7 @@ export const Champions = {
     'Caitlyn',
     'Camille',
     'Cassiopeia',
-    'Chogath',
+    "Cho'Gath",
     'Corki',
     'Darius',
     'Diana',
@@ -339,6 +339,6 @@ export const Champions = {
     'Sylas',
     'Pyke',
     'Zoe',
-    'Qiyana'
-  ]
+    'Qiyana',
+  ],
 };
