@@ -3,39 +3,52 @@
 Janitor Joe is the friendly Discord bot that is always cleaning up after your mess.<br>
 
 ## Available Commands
+
 If the bot is added to your Discord server, you can run certain commands.<br>
 The prefix to run those commands is '/' (without quotes).
 
 ## Admin commands
+
 These commands can only be performed by admins.
 
 ### `/kick (username)`
+
 Will kick the @mentioned user.<br>
 Can be given a third parameter, which would be the reasoning, which is optional.<br>
 If no reason is specified, it will say this in the respective server log.
 
 ### `/ban (username)`
+
 Exactly the same as kick, but will ban the mentioned user instead.
 
 ### `/purge (amount of messages to delete)`
+
 Deletes the requested amount of messages, you can delete 1-100 messages at once.<br>
 You can not delete more than 100 at a time because Discord doesn't let you.
 
 ## Commands for everyone!
 
 ### `/help`
+
 Returns a list of available commands
 
 ### `/tifu`
+
 Returns a random post from the new tifu subreddit.
 If given the list parameter it will return a list with 20 links to posts.
 
 ### `/champion`
+
 Returns a random champion from [League of Legends](https://leagueoflegends.com)<br>
 If given the parameter 'top', 'mid', 'jungle', 'adc' or 'support', it will return champions respectively to those lanes.
 
 ### `/coinflip`
+
 Does a coinflip to 'predict' the result of your next game.
+
+### `/stats`
+
+Gets the current and previous recorded league of legends ranked stats.
 
 ## Available Scripts
 
