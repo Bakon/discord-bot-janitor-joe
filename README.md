@@ -46,9 +46,9 @@ If given the parameter 'top', 'mid', 'jungle', 'adc' or 'support', it will retur
 
 Does a coinflip to 'predict' the result of your next game.
 
-### `/stats`
+### `/stats (username)`
 
-Gets the current and previous recorded league of legends ranked stats.
+Gets the current & previous recorded ranked ladder positions.
 
 ## Available Scripts
 

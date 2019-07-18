@@ -8,10 +8,16 @@ export const config = {
 export const run = async (bot, message, args) => {
   getPlayerStats(args[0]).then(result => {
     message.channel.send('** ** \n' + result.stats.join('\n'));
+
+    if (args[1]) {
+      getPlayerStats(args[1]).then(result => {
+        message.channel.send('** ** \n' + result.stats.join('\n'));
+      });
+    }
+    // console.log(args[1]);
+    // Promise.all([fetchData(args[0]), fetchData(args[1])]).then(console.log);
   });
 };
-
-// Promise.all([fetchData('Daemosi'), fetchData('Juiio')]).then(console.log);
 
 // Iron 4 = 0
 // Iron 3 = 100

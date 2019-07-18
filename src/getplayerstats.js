@@ -1,26 +1,37 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+import {parse} from 'node-html-parser';
 
 export const getPlayerStats = username => {
-  const pastRanks = /<li class="Item tip" title="([^"]+)"/gm;
-  const currentRank = /<meta name="description" content="[^/]+\/([^/]+)/gm;
-
   return fetch(`https://euw.op.gg/summoner/userName=${username}`)
     .then(res => res.text())
     .then(html => {
-      const currentMatch = currentRank.exec(html);
-      const current = currentMatch
-        ? currentMatch[1].trim()
-        : console.log(username);
+      const parsedHTML = parse(html);
+      const pastRankList = parsedHTML
+        .querySelector('.PastRankList')
+        .childNodes.toString();
 
-      const past = [];
-      let pastMatch = null;
+      const currentSeason =
+        'Current: ' +
+        parsedHTML.querySelector('.TierRank').innerHTML +
+        ' ' +
+        parsedHTML.querySelector('.LeaguePoints').innerHTML.trim();
 
-      while ((pastMatch = pastRanks.exec(html))) {
-        past.push(pastMatch[1].trim());
-      }
+      let previousSeasonsPlayed = parsedHTML
+        .querySelectorAll('.PastRankList li')
+        .map(li => {
+          return [
+            'Season ' + li.querySelector('b').rawText.substr(1, 1),
+            li.attributes.title === undefined
+              ? li.rawText.trim().substr(3, 4)
+              : li.attributes.title,
+          ].join(': ');
+        });
+
+      previousSeasonsPlayed.reverse();
+
       return {
         username,
-        stats: [current, ...past],
+        stats: [currentSeason, ...previousSeasonsPlayed],
       };
     });
 };
