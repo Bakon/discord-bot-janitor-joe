@@ -26,6 +26,10 @@ Exactly the same as kick, but will ban the mentioned user instead.
 Deletes the requested amount of messages, you can delete 1-100 messages at once.<br>
 You can not delete more than 100 at a time because Discord doesn't let you.
 
+### `/region`
+
+Changes server region from EU-west to EU-central.
+
 ## Commands for everyone!
 
 ### `/help`
