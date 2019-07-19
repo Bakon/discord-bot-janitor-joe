@@ -1,27 +1,19 @@
+import {permission} from '../../functions/permission';
+
 export const config = {
-  name: 'ban',
+  name: 'kick',
   aliases: [],
 };
 
 export const run = async (bot, message, args) => {
+  permission(message);
+  message.delete(0);
+
   let mentionedUser = message.mentions.users.first();
   let suppliedReason =
     args.slice(1).join(' ') ||
     `${message.author.username} did not supply reason.`;
-  let banLog = `${message.author.username}: ${suppliedReason}`;
-
-  message.delete(0);
-
-  if (!message.member.hasPermission('ADMINISTRATOR')) {
-    message.channel
-      .send(
-        `Sorry ${message.author.username}, but you don't have permission to do that!`
-      )
-      .then(message => {
-        message.delete(5000);
-      });
-    return;
-  }
+  let kickLog = `${message.author.username}: ${suppliedReason}`;
 
   if (!mentionedUser) {
     message.channel
@@ -34,7 +26,7 @@ export const run = async (bot, message, args) => {
 
   message.guild
     .member(mentionedUser)
-    .ban(banLog)
+    .kick(kickLog)
     .then(console.log)
     .catch(console.error);
 };

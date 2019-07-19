@@ -20,7 +20,7 @@ bot.on('ready', () => {
     .catch(console.error);
 });
 
-glob.sync(`${__dirname}/commands/*.js`).forEach(filePath => {
+glob.sync(`${__dirname}/commands/**/*.js`).forEach(filePath => {
   let commandClass = require(filePath);
 
   bot.commands.set(commandClass.config.name, commandClass);

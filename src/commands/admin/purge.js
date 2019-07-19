@@ -1,21 +1,13 @@
+import {permission} from '../../functions/permission';
+
 export const config = {
   name: 'purge',
   aliases: ['delete', 'remove'],
 };
 
 export const run = async (bot, message, args) => {
+  permission(message);
   message.delete();
-
-  if (!message.member.hasPermission('ADMINISTRATOR')) {
-    message.channel
-      .send(
-        `Sorry ${message.author.username} but you don't have permission to do that!`
-      )
-      .then(message => {
-        message.delete(5000);
-      });
-    return;
-  }
 
   let messagesToDelete = Number(args[0]);
 

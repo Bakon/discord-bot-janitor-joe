@@ -1,4 +1,4 @@
-import {Champions} from '../data/champions';
+import {Champions} from '../../data/champions';
 
 export const config = {
   name: 'champion',

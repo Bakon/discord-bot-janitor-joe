@@ -1,4 +1,4 @@
-import {getPlayerStats} from '../getplayerstats';
+import {getPlayerStats} from '../../functions/getplayerstats';
 
 export const config = {
   name: 'compare',

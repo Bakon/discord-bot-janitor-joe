@@ -45,8 +45,8 @@ export const getPlayerStats = searchQuery => {
         return `\`| ${columns[0]} | ${columns[1]} |\``;
       });
 
-      // - 6 because white space & backticks (``)
       const userLength = username.length + 1;
+      // - 6 because white space & backticks (``)
       const maxLength = finalStats[0].length - 6;
 
       finalStats.unshift(
