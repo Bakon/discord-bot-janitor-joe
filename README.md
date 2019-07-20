@@ -28,7 +28,7 @@ You can not delete more than 100 at a time because Discord doesn't let you.
 
 ### `/region`
 
-Changes server region from EU-west to EU-central.
+Changes server region between EU west or central.
 
 ## Commands for everyone!
 

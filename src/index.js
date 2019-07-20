@@ -2,21 +2,16 @@ import Discord from 'discord.js';
 import glob from 'glob';
 import {token} from '../token';
 
-const prefix = '/';
+export const prefix = '/';
+
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
 bot.on('ready', () => {
   bot.user
-    .setActivity('Janitor simulator || "/help" for help', {type: 'PLAYING'})
-    .then(presence =>
-      console.log(
-        `${bot.user.username} is online! Activity set to ${
-          presence.game ? presence.game.name : 'none'
-        }`
-      )
-    )
+    .setActivity("Janitor simulator, '/help' for help", {type: 'PLAYING'})
+    .then(() => console.log(`${bot.user.username} is online!`))
     .catch(console.error);
 });
 

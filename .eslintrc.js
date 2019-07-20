@@ -15,6 +15,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-cond-assign': 'except-parens',
+    'no-cond-assign': 0,
   },
 };

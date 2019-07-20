@@ -1,6 +1,7 @@
 export const config = {
   name: 'coinflip',
   aliases: ['coin', 'flip', 'rng'],
+  description: 'Rolls a coin to determine the outcome of the game',
 };
 
 export const run = async (bot, message) => {

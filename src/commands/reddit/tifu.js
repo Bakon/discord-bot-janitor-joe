@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 export const config = {
   name: 'tifu',
   aliases: [],
+  description: "Returns a recent post from the 'TIFU' subreddit",
 };
 
 export const run = async (bot, message, args) => {
@@ -24,13 +25,13 @@ export const run = async (bot, message, args) => {
 
   if (args == 'list') {
     return getPosts.then(() => {
-      message.channel.send('** ** \n' + postsList.slice(0, 20).join('\n'));
+      message.channel.send('\u200b\n' + postsList.slice(0, 20).join('\n'));
     });
   }
 
   getPosts.then(() => {
     message.channel.send(
-      '** ** \n' +
+      '\u200b\n' +
         postCollection[Math.floor(Math.random() * postCollection.length)]
     );
     postCollection.splice(

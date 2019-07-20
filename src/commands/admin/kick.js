@@ -1,12 +1,13 @@
-import {permission} from '../../functions/permission';
+import {admincheck} from '../../modules/admincheck';
 
 export const config = {
   name: 'kick',
   aliases: [],
+  description: 'Kicks the @mentioned user',
 };
 
 export const run = async (bot, message, args) => {
-  permission(message);
+  admincheck(message);
   message.delete(0);
 
   let mentionedUser = message.mentions.users.first();

@@ -1,4 +1,4 @@
-export const permission = message => {
+export const admincheck = message => {
   if (!message.member.hasPermission('ADMINISTRATOR')) {
     message.channel
       .send(

@@ -1,12 +1,13 @@
-import {permission} from '../../functions/permission';
+import {admincheck} from '../../modules/admincheck';
 
 export const config = {
   name: 'purge',
   aliases: ['delete', 'remove'],
+  description: 'Kicks the @mentioned user',
 };
 
 export const run = async (bot, message, args) => {
-  permission(message);
+  admincheck(message);
   message.delete();
 
   let messagesToDelete = Number(args[0]);

@@ -1,8 +1,9 @@
-import {getPlayerStats} from '../../functions/getplayerstats';
+import {getPlayerStats} from '../../modules/getplayerstats';
 
 export const config = {
   name: 'compare',
   aliases: ['getstats', 'stats'],
+  description: 'Compares the ranked stats of 2 players',
 };
 
 export const run = async (bot, message, args) => {
@@ -23,7 +24,7 @@ export const run = async (bot, message, args) => {
       });
 
       Promise.all([getPlayerStats([0]), getPlayerStats([1])]).then(
-        message.channel.send('** ** \n' + results.join('\n'))
+        message.channel.send('\u200b\n' + results.join('\n'))
       );
     }
     // Promise.all([fetchData(args[0]), fetchData(args[1])]).then(console.log);

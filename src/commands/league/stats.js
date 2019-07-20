@@ -1,8 +1,9 @@
-import {getPlayerStats} from '../../functions/getplayerstats';
+import {getPlayerStats} from '../../modules/getplayerstats';
 
 export const config = {
   name: 'stats',
-  aliases: ['getstats'],
+  aliases: ['getstats', 'roastme'],
+  description: 'Fetches requested user ranked stats',
 };
 
 export const run = async (bot, message, args) => {

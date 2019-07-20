@@ -3,6 +3,8 @@ import {Champions} from '../../data/champions';
 export const config = {
   name: 'champion',
   aliases: ['champ'],
+  description:
+    'Returns a random champion, if given a lane it will return a champ for that lane\nFor example: /champion supp',
 };
 
 export const run = async (bot, message, args) => {

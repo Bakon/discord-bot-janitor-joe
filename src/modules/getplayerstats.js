@@ -7,9 +7,6 @@ export const getPlayerStats = searchQuery => {
     .then(html => {
       const parsedHTML = parse(html);
       const username = parsedHTML.querySelector('.Profile .Name').rawText;
-      const pastRankList = parsedHTML
-        .querySelector('.PastRankList')
-        .childNodes.toString();
 
       let allSeasonsPlayed = parsedHTML
         .querySelectorAll('.PastRankList li')
@@ -46,7 +43,6 @@ export const getPlayerStats = searchQuery => {
       });
 
       const userLength = username.length + 1;
-      // - 6 because white space & backticks (``)
       const maxLength = finalStats[0].length - 6;
 
       finalStats.unshift(
