@@ -2,7 +2,7 @@ import {getPlayerStats} from '../../modules/getplayerstats';
 
 export const config = {
   name: 'compare',
-  aliases: ['getstats', 'stats'],
+  aliases: [],
   description: 'Compares the ranked stats of 2 players',
 };
 

@@ -62,6 +62,16 @@ export const run = async (bot, message, args) => {
           value: '\u200b',
         },
         {
+          name: 'Music commands (WIP)',
+          value: `/${commandsObj.music
+            .map(command => command + '\n')
+            .join('/')}`,
+        },
+        {
+          name: '\u200b',
+          value: '\u200b',
+        },
+        {
           name: 'Reddit commands',
           value: `/${commandsObj.reddit
             .map(command => command + '\n')

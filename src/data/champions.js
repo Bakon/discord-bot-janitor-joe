@@ -1,4 +1,4 @@
-export const Champions = {
+export const Champs = {
   top: [
     'Aatrox',
     'Akali',
@@ -168,7 +168,7 @@ export const Champions = {
     'Vayne',
     'Xayah',
   ],
-  support: [
+  supp: [
     'Alistar',
     'Bard',
     'Blitzcrank',

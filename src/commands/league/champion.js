@@ -1,4 +1,4 @@
-import {Champions} from '../../data/champions';
+import {Champs} from '../../data/champions';
 
 export const config = {
   name: 'champion',
@@ -8,35 +8,36 @@ export const config = {
 };
 
 export const run = async (bot, message, args) => {
-  function randomChampion() {
-    let suppliedRole = args.slice(0).join(' ');
-
+  const suppliedRole = args[0];
+  const checkArgs = args[1] === 'all' || args[1] === 'list';
+  const rAdc = Champs.adc[Math.floor(Math.random() * Champs.adc.length)];
+  const rSupp = Champs.supp[Math.floor(Math.random() * Champs.supp.length)];
+  const rMid = Champs.mid[Math.floor(Math.random() * Champs.mid.length)];
+  const rJgl = Champs.jungle[Math.floor(Math.random() * Champs.jungle.length)];
+  const rTop = Champs.top[Math.floor(Math.random() * Champs.top.length)];
+  const randomChampion = () => {
     switch (suppliedRole) {
       case 'adc':
       case 'bot':
-        return Champions.adc[Math.floor(Math.random() * Champions.adc.length)];
+        return checkArgs ? ['\u200b', ...Champs.adc] : rAdc;
 
       case 'support':
       case 'supp':
-        return Champions.support[
-          Math.floor(Math.random() * Champions.support.length)
-        ];
+        return checkArgs ? ['\u200b', ...Champs.supp] : rSupp;
 
       case 'mid':
-        return Champions.mid[Math.floor(Math.random() * Champions.mid.length)];
+        return checkArgs ? ['\u200b', ...Champs.mid] : rMid;
 
       case 'jungle':
       case 'jgl':
-        return Champions.jungle[
-          Math.floor(Math.random() * Champions.jungle.length)
-        ];
+        return checkArgs ? ['\u200b', ...Champs.jungle] : rJgl;
 
       case 'top':
-        return Champions.top[Math.floor(Math.random() * Champions.top.length)];
+        return checkArgs ? ['\u200b', ...Champs.supp] : rTop;
 
       default:
-        return Champions.any[Math.floor(Math.random() * Champions.any.length)];
+        return Champs.any[Math.floor(Math.random() * Champs.any.length)];
     }
-  }
+  };
   message.channel.send(randomChampion());
 };
