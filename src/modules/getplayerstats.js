@@ -17,10 +17,13 @@ export const getPlayerStats = searchQuery => {
           ];
         });
 
-      const currentStats =
-        parsedHTML.querySelector('.TierRank').innerHTML +
-        ' ' +
-        parsedHTML.querySelector('.LeaguePoints').innerHTML.trim();
+      let currentStats;
+
+      parsedHTML.querySelector('.LeaguePoints') !== null
+        ? (currentStats =
+            parsedHTML.querySelector('.TierRank').innerHTML +
+            parsedHTML.querySelector('.LeaguePoints').innerHTML.trim())
+        : (currentStats = 'Unranked');
 
       allSeasonsPlayed.push(['Current', currentStats]);
 
