@@ -7,13 +7,14 @@ export default class Compare {
 
   static run(bot, message, args) {
     if (args) {
-      Promise.all([GetPlayerStats(args[0]), GetPlayerStats(args[1])]).then(
-        promise => {
-          console.log(promise);
+      Promise.all([
+        GetPlayerStats.run(args[0]),
+        GetPlayerStats.run(args[1]),
+      ]).then(promise => {
+        console.log(promise);
 
-          message.channel.send(promise);
-        }
-      );
+        message.channel.send(promise);
+      });
     }
   }
 }

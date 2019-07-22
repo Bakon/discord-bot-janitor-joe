@@ -96,4 +96,6 @@ Runs the bot in development mode. <br>
 In development mode it uses [Nodemon](https://nodemon.io/) to watch Node processes and restarts those when you save a file.<br>
 After adding the bot to your server you can execute the above mentioned commands.
 
-#[Older version that's made with TypeScript instead of JavaScript](https://github.com/Julicolo/JanitorJoeTS)
+# [Older version that's made with TypeScript instead of JavaScript](https://github.com/Julicolo/JanitorJoeTS)
+
+Keep in mind that this TypeScript version is super stale.

@@ -15,6 +15,7 @@ export default class Champion {
     const rJgl =
       Champs.jungle[Math.floor(Math.random() * Champs.jungle.length)];
     const rTop = Champs.top[Math.floor(Math.random() * Champs.top.length)];
+
     const randomChampion = () => {
       switch (suppliedRole) {
         case 'adc':

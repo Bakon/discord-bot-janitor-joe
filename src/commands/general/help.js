@@ -1,5 +1,9 @@
 import glob from 'glob';
 
+// If a user does /champion /help it does not run the Help class
+// This is because /champion already uses the second parameter
+// This appears to be the case for all commands that can be given more than 1 argument
+
 export default class Help {
   static name = 'help';
   static aliases = ['h', 'commands'];

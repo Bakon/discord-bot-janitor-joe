@@ -26,11 +26,6 @@ glob.sync(`${__dirname}/commands/**/*.js`).forEach(filePath => {
     aliases.forEach(alias => {
       bot.aliases.set(alias, name);
     });
-  } else {
-    bot.commands.set(commandClass.config.name, commandClass);
-    commandClass.config.aliases.forEach(alias => {
-      bot.aliases.set(alias, commandClass.config.name);
-    });
   }
 });
 
