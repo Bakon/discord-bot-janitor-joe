@@ -3,7 +3,8 @@ import YTDL from 'ytdl-core';
 export const config = {
   name: 'play',
   aliases: ['join', 'start'],
-  description: 'Lets the bot join the voice channel',
+  description:
+    "Let's the bot join the voice channel the user is in, and will play the requested song.",
 };
 
 export const run = async (bot, message, args, options) => {
@@ -35,6 +36,7 @@ export const run = async (bot, message, args, options) => {
   if (!data.queue) data.queue = [];
 
   data.guildID = message.guild.id;
+
   data.queue.push({
     songTitle: info.title,
     requestedBy: message.author.username,
@@ -52,14 +54,15 @@ export const run = async (bot, message, args, options) => {
 };
 
 const playMusic = async (bot, options, data) => {
-  let settings = {seek: 2, volume: 1, bitrate: 12800};
+  let settings = {seek: 2, volume: 1, bitrate: 12800}; // Disabled because of recent ESLint 6.0.1 bug.
 
-  data.dispatcher = await data.connection.playStream(
+  /*eslint-disable */ data.dispatcher = await data.connection.playStream(
     YTDL(data.queue[0].url, {filter: 'audioonly'}),
     settings
   );
 
   data.dispatcher.guildID = data.guildID;
+  /*eslint-enable */
 
   data.dispatcher.once('end', function() {
     return stopMusic(bot, options, this);
@@ -82,8 +85,8 @@ const stopMusic = (bot, options, dispatcher) => {
   } else {
     options.active.delete(dispatcher.guildID);
 
-    let voiceChannel = bot.guilds.get(dispatcher.guildID).me.voiceChannel;
-
-    if (voiceChannel) voiceChannel.leave();
+    if (bot.guilds.get(dispatcher.guildID).me.voiceChannel) {
+      bot.guilds.get(dispatcher.guildID).me.voiceChannel.leave();
+    }
   }
 };

@@ -1,10 +1,10 @@
 export const config = {
   name: 'stop',
   aliases: ['leave', 'quit'],
-  description: 'Lets the bot leave the voice channel',
+  description: 'The bot will stop playing music and leaves the voice channel',
 };
 
-export const run = async (bot, message, args) => {
+export const run = async (bot, message) => {
   message.guild.voiceConnection
     ? message.guild.voiceConnection.disconnect()
     : message.channel.send(

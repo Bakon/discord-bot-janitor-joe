@@ -1,3 +1,5 @@
+// To be implemented on every command that requires an admin check
+
 export const admincheck = message => {
   if (!message.member.hasPermission('ADMINISTRATOR')) {
     message.channel

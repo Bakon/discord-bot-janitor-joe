@@ -10,6 +10,7 @@ module.exports = {
     __dirname: 'readonly',
     require: 'readonly',
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',

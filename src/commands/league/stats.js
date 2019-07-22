@@ -9,6 +9,6 @@ export const config = {
 export const run = async (bot, message, args) => {
   const input = args.join('+');
   getPlayerStats(input).then(result => {
-    message.channel.send('** ** \n' + result.stats.join('\n'));
+    message.channel.send('\u200b\n' + result.stats.join('\n'));
   });
 };

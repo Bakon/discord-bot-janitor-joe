@@ -6,30 +6,17 @@ export const config = {
   description: 'Compares the ranked stats of 2 players',
 };
 
-export const run = async (bot, message, args) => {
-  getPlayerStats(args[0]).then(result => {
-    message.channel.send('** ** \n' + result.stats.join('\n'));
+// export const run = async (bot, message, args) => {
+//   if (args) {
+//     Promise.all([getPlayerStats(args[0]), getPlayerStats(args[1])]).then(
+//       promise => {
+//         console.log(promise);
 
-    if (args[1]) {
-      const player1Stats = [];
-      const player2Stats = [];
-      const results = () => {};
-
-      getPlayerStats(args[0]).then(result => {
-        player1Stats.push(result);
-      });
-
-      getPlayerStats(args[1]).then(result => {
-        player2Stats.push(result);
-      });
-
-      Promise.all([getPlayerStats([0]), getPlayerStats([1])]).then(
-        message.channel.send('\u200b\n' + results.join('\n'))
-      );
-    }
-    // Promise.all([fetchData(args[0]), fetchData(args[1])]).then(console.log);
-  });
-};
+//         message.channel.send(promise);
+//       }
+//     );
+//   }
+// };
 
 // Iron 4 = 0
 // Iron 3 = 100

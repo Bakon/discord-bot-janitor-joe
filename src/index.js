@@ -19,27 +19,35 @@ bot.on('ready', () => {
 glob.sync(`${__dirname}/commands/**/*.js`).forEach(filePath => {
   let commandClass = require(filePath);
 
-  bot.commands.set(commandClass.config.name, commandClass);
-  commandClass.config.aliases.forEach(alias => {
-    bot.aliases.set(alias, commandClass.config.name);
-  });
+  if (commandClass.default) {
+    const {name, aliases} = commandClass.default;
+
+    bot.commands.set(name, commandClass.default);
+    aliases.forEach(alias => {
+      bot.aliases.set(alias, name);
+    });
+  } else {
+    bot.commands.set(commandClass.config.name, commandClass);
+    commandClass.config.aliases.forEach(alias => {
+      bot.aliases.set(alias, commandClass.config.name);
+    });
+  }
 });
 
 bot.on('message', async message => {
   if (message.author.bot || message.channel.type === 'dm') return;
   if (!message.content.startsWith(prefix)) return;
 
-  let messageArray = message.content.split(' ');
-  let command = messageArray[0];
-  let args = messageArray.slice(1);
-  let options = {
+  const messageArray = message.content.split(' ');
+  const command = messageArray[0].slice(prefix.length);
+  const args = messageArray.slice(1);
+  const options = {
     active,
   };
-  let commands =
-    bot.commands.get(command.slice(prefix.length)) ||
-    bot.commands.get(bot.aliases.get(command.slice(prefix.length)));
+  const foundCommand =
+    bot.commands.get(command) || bot.commands.get(bot.aliases.get(command));
 
-  if (commands) commands.run(bot, message, args, options);
+  if (foundCommand) foundCommand.run(bot, message, args, options);
 });
 
 bot.login(token);

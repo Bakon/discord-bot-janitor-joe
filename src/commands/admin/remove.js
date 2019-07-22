@@ -1,9 +1,9 @@
 import {admincheck} from '../../modules/admincheck';
 
 export const config = {
-  name: 'purge',
-  aliases: ['delete', 'remove'],
-  description: 'Kicks the @mentioned user',
+  name: 'remove',
+  aliases: ['delete', 'purge', 'clear'],
+  description: 'Deletes 1-100 messages, \n Example: /remove 50',
 };
 
 export const run = async (bot, message, args) => {
