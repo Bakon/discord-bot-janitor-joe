@@ -6,7 +6,7 @@ export default class Ban {
   static description = 'Bans the @mentioned user';
 
   static run(bot, message, args) {
-    Admincheck(message);
+    Admincheck.run(message);
     message.delete(0);
 
     let mentionedUser = message.mentions.users.first();

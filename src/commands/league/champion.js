@@ -42,12 +42,15 @@ export default class Champion {
               return Users[username].top[
                 Math.floor(Math.random() * Users[username].top.length)
               ];
+
+            default:
+              return Champs.any[Math.floor(Math.random() * Champs.any.length)];
           }
         };
         message.channel.send(randomPool());
       } else {
-        message.chanell.send(
-          "I couldn't find a champion pool with this username..."
+        message.channel.send(
+          "I couldn't find a champion pool for this username..."
         );
       }
     } else {

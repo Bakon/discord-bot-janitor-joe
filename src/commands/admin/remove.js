@@ -6,7 +6,7 @@ export default class Remove {
   static description = 'Deletes 1-100 messages, \n Example: /remove 50';
 
   static run(bot, message, args) {
-    Admincheck(message);
+    Admincheck.run(message);
     message.delete();
 
     let messagesToDelete = Number(args[0]);
