@@ -1,58 +1,58 @@
 import YTDL from 'ytdl-core';
 
-export const config = {
-  name: 'play',
-  aliases: ['join', 'start'],
-  description:
-    "Let's the bot join the voice channel the user is in, and will play the requested song.",
-};
+export default class Play {
+  static name = 'play';
+  static aliases = ['join', 'start'];
+  static description =
+    "Let's the bot join the voice channel the user is in, and will play the requested song.";
 
-export const run = async (bot, message, args, options) => {
-  let validate = await YTDL.validateURL(args[0]);
-  let info = await YTDL.getInfo(args[0]);
-  let data = options.active.get(message.guild.id) || {};
+  static async run(bot, message, args, options) {
+    let validate = await YTDL.validateURL(args[0]);
+    let info = await YTDL.getInfo(args[0]);
+    let data = options.active.get(message.guild.id) || {};
 
-  if (!message.member.voiceChannel) {
-    return message.channel.send(
-      'You must be in a voice channel to summon me! :('
-    );
-  }
-
-  if (message.guild.voiceChannel) {
-    return message.channel.send("I'm already connected to a voice channel..");
-  }
-
-  if (!args[0]) return message.channel.send("I didn't get any URL to play!");
-
-  if (!validate) {
-    return message.channel.send(
-      "I have an URL but I can't seem to find anything, check the provided URL!"
-    );
-  }
-
-  if (!data.connection) {
-    data.connection = await message.member.voiceChannel.join();
-  }
-
-  if (!data.queue) data.queue = [];
-
-  data.guildID = message.guild.id;
-
-  data.queue.push({
-    songTitle: info.title,
-    requestedBy: message.author.username,
-    url: args[0],
-    channel: message.channel.id,
-  });
-
-  !data.dispatcher
-    ? playMusic(bot, options, data)
-    : message.channel.send(
-        `${message.author.username} added ${info.title} to the queue`
+    if (!message.member.voiceChannel) {
+      return message.channel.send(
+        'You must be in a voice channel to summon me! :('
       );
+    }
 
-  options.active.set(message.guild.id, data);
-};
+    if (message.guild.voiceChannel) {
+      return message.channel.send("I'm already connected to a voice channel..");
+    }
+
+    if (!args[0]) return message.channel.send("I didn't get any URL to play!");
+
+    if (!validate) {
+      return message.channel.send(
+        "I have an URL but I can't seem to find anything, check the provided URL!"
+      );
+    }
+
+    if (!data.connection) {
+      data.connection = await message.member.voiceChannel.join();
+    }
+
+    if (!data.queue) data.queue = [];
+
+    data.guildID = message.guild.id;
+
+    data.queue.push({
+      songTitle: info.title,
+      requestedBy: message.author.username,
+      url: args[0],
+      channel: message.channel.id,
+    });
+
+    !data.dispatcher
+      ? playMusic(bot, options, data)
+      : message.channel.send(
+          `${message.author.username} added ${info.title} to the queue`
+        );
+
+    options.active.set(message.guild.id, data);
+  }
+}
 
 const playMusic = async (bot, options, data) => {
   let settings = {seek: 2, volume: 1, bitrate: 12800};

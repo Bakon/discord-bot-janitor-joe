@@ -1,22 +1,23 @@
-import {admincheck} from '../../modules/admincheck';
+import Admincheck from '../../modules/admincheck';
 
-export const config = {
-  name: 'region',
-  aliases: ['changeregion'],
-  description: 'Changes the server region between EU-west and EU-central',
-};
+export default class Region {
+  static name = 'region';
+  static aliases = ['changeregion'];
+  static description =
+    'Changes the server region between EU-west and EU-central';
 
-export const run = async (bot, message) => {
-  admincheck(message);
+  static run(bot, message) {
+    Admincheck.run(message);
 
-  let currentRegion = message.guild.region;
-  let otherRegion =
-    message.guild.region === 'eu-central' ? 'eu-west' : 'eu-central';
+    let currentRegion = message.guild.region;
+    let otherRegion =
+      message.guild.region === 'eu-central' ? 'eu-west' : 'eu-central';
 
-  if (message.guild.region === currentRegion)
-    message.guild.setRegion(otherRegion);
+    if (message.guild.region === currentRegion)
+      message.guild.setRegion(otherRegion);
 
-  message.channel.send(
-    `${message.author.username} changed the region to ${currentRegion} !`
-  );
-};
+    message.channel.send(
+      `${message.author.username} changed the region from ${currentRegion} to \`${otherRegion}\` !`
+    );
+  }
+}

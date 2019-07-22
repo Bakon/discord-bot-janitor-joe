@@ -3,8 +3,8 @@ import glob from 'glob';
 import {token} from '../token';
 
 export const prefix = '/';
-const active = new Map();
 
+const active = new Map();
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();

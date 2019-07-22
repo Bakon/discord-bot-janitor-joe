@@ -1,22 +1,22 @@
-import {getPlayerStats} from '../../modules/getplayerstats';
+import GetPlayerStats from '../../modules/getplayerstats';
 
-export const config = {
-  name: 'compare',
-  aliases: [],
-  description: 'Compares the ranked stats of 2 players',
-};
+export default class Compare {
+  static name = 'compare';
+  static aliases = [];
+  static description = 'Compares the ranked stats of 2 players';
 
-// export const run = async (bot, message, args) => {
-//   if (args) {
-//     Promise.all([getPlayerStats(args[0]), getPlayerStats(args[1])]).then(
-//       promise => {
-//         console.log(promise);
+  static run(bot, message, args) {
+    if (args) {
+      Promise.all([GetPlayerStats(args[0]), GetPlayerStats(args[1])]).then(
+        promise => {
+          console.log(promise);
 
-//         message.channel.send(promise);
-//       }
-//     );
-//   }
-// };
+          message.channel.send(promise);
+        }
+      );
+    }
+  }
+}
 
 // Iron 4 = 0
 // Iron 3 = 100

@@ -1,23 +1,23 @@
-export const config = {
-  name: 'queue',
-  aliases: ['next'],
-  description: 'Adds song to the queue',
-};
+export default class Queue {
+  static name = 'queue';
+  static aliases = ['next'];
+  static description = 'Adds song to the queue';
 
-export const run = async (bot, message, args, options) => {
-  let guildIdData = options.active.get(message.guild.id);
+  static run(bot, message, args, options) {
+    let guildIdData = options.active.get(message.guild.id);
 
-  if (!guildIdData) {
-    return message.channel.send('The queue seems to be empty!');
+    if (!guildIdData) {
+      return message.channel.send('The queue seems to be empty!');
+    }
+
+    let queue = guildIdData.queue;
+    let nowPlaying = queue[0];
+    let response = `Now playing: ${nowPlaying.songTitle}, requested by: ${nowPlaying.requestedBy} \n\n Queue \n`;
+
+    for (let i = 0; i < queue.length; i++) {
+      response += `${i}. ${queue[i].songTitle} - Requested by: ${queue[i].requestedBy}\n`;
+    }
+
+    message.channel.send(response);
   }
-
-  let queue = guildIdData.queue;
-  let nowPlaying = queue[0];
-  let response = `Now playing: ${nowPlaying.songTitle}, requested by: ${nowPlaying.requestedBy} \n\n Queue \n`;
-
-  for (let i = 0; i < queue.length; i++) {
-    response += `${i}. ${queue[i].songTitle} - Requested by: ${queue[i].requestedBy}\n`;
-  }
-
-  message.channel.send(response);
-};
+}

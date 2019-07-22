@@ -1,14 +1,14 @@
-import {getPlayerStats} from '../../modules/getplayerstats';
+import GetPlayerStats from '../../modules/getplayerstats';
 
-export const config = {
-  name: 'stats',
-  aliases: ['getstats', 'roastme'],
-  description: 'Fetches requested user ranked stats',
-};
+export default class Stats {
+  static name = 'stats';
+  static aliases = ['getstats', 'roastme'];
+  static description = 'Fetches requested user ranked stats';
 
-export const run = async (bot, message, args) => {
-  const input = args.join('+');
-  getPlayerStats(input).then(result => {
-    message.channel.send('\u200b\n' + result.stats.join('\n'));
-  });
-};
+  static run(bot, message, args) {
+    const input = args.join('+');
+    GetPlayerStats(input).then(result => {
+      message.channel.send('\u200b\n' + result.stats.join('\n'));
+    });
+  }
+}
