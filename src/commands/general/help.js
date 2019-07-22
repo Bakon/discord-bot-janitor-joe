@@ -7,27 +7,17 @@ export default class Help {
     "Displays the help command,\n for general help type '/help' lol";
 
   static run(bot, message, args) {
-    let commandsObj = {};
-    glob.sync('src/commands/*/*.js').forEach(filePath => {
-      return (commandsObj[filePath.split('/')[2]] = []);
-    });
+    const commandsObj = glob
+      .sync('src/commands/*/*.js')
+      .reduce((commandsObj, filePath) => {
+        const category = filePath.split('/')[2];
+        const file = filePath.split('/')[3].split('.')[0];
 
-    glob.sync('src/commands/*/*.js').forEach(filePath => {
-      const filePartPath = filePath.split('/');
-      return commandsObj[filePartPath[2]].push(filePartPath[3].split('.')[0]);
-    });
+        if (!Array.isArray(commandsObj[category])) commandsObj[category] = [];
 
-    // Has a bug where it overwrites the array value with the new specified value
-    // instead of ading it to the array each iteration
-
-    // const commandsObj = glob
-    //   .sync('src/commands/*/*.js')
-    //   .reduce((commandsObj, filePath) => {
-    //     const filePartPath = filePath.split('/');
-
-    //     commandsObj[filePartPath[2]] = [filePartPath[3].split('.')[0]];
-    //     return commandsObj;
-    //   }, {});
+        commandsObj[category].push(file);
+        return commandsObj;
+      }, {});
 
     if (args == '') {
       const helpEmbed = {

@@ -33,6 +33,7 @@ export const run = async (bot, message, args, options) => {
   if (!data.connection) {
     data.connection = await message.member.voiceChannel.join();
   }
+
   if (!data.queue) data.queue = [];
 
   data.guildID = message.guild.id;
@@ -54,9 +55,11 @@ export const run = async (bot, message, args, options) => {
 };
 
 const playMusic = async (bot, options, data) => {
-  let settings = {seek: 2, volume: 1, bitrate: 12800}; // Disabled because of recent ESLint 6.0.1 bug.
+  let settings = {seek: 2, volume: 1, bitrate: 12800};
 
-  /*eslint-disable */ data.dispatcher = await data.connection.playStream(
+  // Disabled because of recent ESLint 6.0.1 bug.
+  /*eslint-disable */
+  data.dispatcher = await data.connection.playStream(
     YTDL(data.queue[0].url, {filter: 'audioonly'}),
     settings
   );
