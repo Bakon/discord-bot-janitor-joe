@@ -7,7 +7,7 @@ export default class Stats {
 
   static run(bot, message, args) {
     const input = args.join('+');
-    GetPlayerStats(input).then(result => {
+    GetPlayerStats.run(input).then(result => {
       message.channel.send('\u200b\n' + result.stats.join('\n'));
     });
   }

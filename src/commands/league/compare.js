@@ -6,15 +6,20 @@ export default class Compare {
   static description = 'Compares the ranked stats of 2 players';
 
   static run(bot, message, args) {
-    if (args) {
+    const firstUser = args[0];
+    const secondUser = args[1];
+
+    if (firstUser && secondUser) {
       Promise.all([
-        GetPlayerStats.run(args[0]),
-        GetPlayerStats.run(args[1]),
+        GetPlayerStats.run(firstUser),
+        GetPlayerStats.run(secondUser),
       ]).then(promise => {
         console.log(promise);
 
         message.channel.send(promise);
       });
+    } else {
+      message.channel.send('I need 2 users if I want to compare them');
     }
   }
 }

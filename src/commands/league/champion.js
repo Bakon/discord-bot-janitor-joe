@@ -7,80 +7,26 @@ export default class Champion {
   static description =
     'Returns a random champion, if given a lane it will return a champ for that lane\nFor example: /champion supp';
 
+  static roleAliases = {
+    bot: 'adc',
+    support: 'supp',
+    jgl: 'jungle',
+  };
+
   static run(bot, message, args) {
-    const suppliedRole = args[0];
-    const username = args[1].toLowerCase();
+    const suppliedRole = this.roleAliases[args[0]] || args[0];
+    const username = (args[1] || '').toLowerCase();
 
-    if (username) {
-      if (username in Users) {
-        const randomPool = function() {
-          switch (suppliedRole) {
-            case 'bot':
-            case 'adc':
-              return Users[username].adc[
-                Math.floor(Math.random() * Users[username].adc.length)
-              ];
-
-            case 'support':
-            case 'supp':
-              return Users[username].supp[
-                Math.floor(Math.random() * Users[username].supp.length)
-              ];
-
-            case 'mid':
-              return Users[username].mid[
-                Math.floor(Math.random() * Users[username].mid.length)
-              ];
-
-            case 'jgl':
-            case 'jungle':
-              return Users[username].jungle[
-                Math.floor(Math.random() * Users[username].jungle.length)
-              ];
-
-            case 'top':
-              return Users[username].top[
-                Math.floor(Math.random() * Users[username].top.length)
-              ];
-
-            default:
-              return Champs.any[Math.floor(Math.random() * Champs.any.length)];
-          }
-        };
-        message.channel.send(randomPool());
-      } else {
-        message.channel.send(
-          "I couldn't find a champion pool for this username..."
-        );
-      }
-    } else {
-      const randomChampion = function() {
-        switch (suppliedRole) {
-          case 'bot':
-          case 'adc':
-            return Champs.adc[Math.floor(Math.random() * Champs.adc.length)];
-
-          case 'supp':
-          case 'support':
-            return Champs.supp[Math.floor(Math.random() * Champs.supp.length)];
-
-          case 'mid':
-            return Champs.mid[Math.floor(Math.random() * Champs.mid.length)];
-
-          case 'jgl':
-          case 'jungle':
-            return Champs.jungle[
-              Math.floor(Math.random() * Champs.jungle.length)
-            ];
-
-          case 'top':
-            return Champs.top[Math.floor(Math.random() * Champs.top.length)];
-
-          default:
-            return Champs.any[Math.floor(Math.random() * Champs.any.length)];
-        }
-      };
-      message.channel.send(randomChampion());
+    if (username && !Users[username]) {
+      return message.channel.send(
+        "I couldn't find a champion pool for this username..."
+      );
     }
+
+    const base = Users[username] || Champs;
+
+    message.channel.send(
+      base[suppliedRole][Math.floor(Math.random() * base[suppliedRole].length)]
+    );
   }
 }

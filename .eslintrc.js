@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: ['eslint:recommended', 'prettier'],
   globals: {
-    // Atomics: 'readonly',
+    Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     __dirname: 'readonly',
     require: 'readonly',
