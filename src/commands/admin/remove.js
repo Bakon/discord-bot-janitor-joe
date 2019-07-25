@@ -1,12 +1,12 @@
-import Admincheck from '../../modules/admincheck';
+import Base from '../../modules/base';
 
-export default class Remove {
+export default class Remove extends Base {
   static name = 'remove';
   static aliases = ['delete', 'purge', 'clear'];
   static description = 'Deletes 1-100 messages, \n Example: /remove 50';
 
   static run(bot, message, args) {
-    Admincheck.run(message);
+    if (!this.adminCheck(message)) return;
     message.delete();
 
     let messagesToDelete = Number(args[0]);

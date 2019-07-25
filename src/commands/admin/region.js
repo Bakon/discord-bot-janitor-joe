@@ -1,13 +1,13 @@
-import Admincheck from '../../modules/admincheck';
+import Base from '../../modules/base';
 
-export default class Region {
+export default class Region extends Base {
   static name = 'region';
   static aliases = ['changeregion'];
   static description =
     'Changes the server region between EU-west and EU-central';
 
   static run(bot, message) {
-    Admincheck.run(message);
+    if (!this.adminCheck(message)) return;
 
     let currentRegion = message.guild.region;
     let otherRegion =

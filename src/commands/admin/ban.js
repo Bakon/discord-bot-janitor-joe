@@ -1,12 +1,13 @@
-import Admincheck from '../../modules/admincheck';
+import Base from '../../modules/base';
 
-export default class Ban {
+export default class Ban extends Base {
   static name = 'ban';
   static aliases = [];
   static description = 'Bans the @mentioned user';
 
   static run(bot, message, args) {
-    Admincheck.run(message);
+    if (!this.adminCheck(message)) return;
+
     message.delete(0);
 
     let mentionedUser = message.mentions.users.first();

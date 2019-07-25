@@ -1,12 +1,12 @@
-import Admincheck from '../../modules/admincheck';
+import Base from '../../modules/base';
 
-export default class Kick {
+export default class Kick extends Base {
   static name = 'kick';
   static aliases = [];
   static description = 'Kicks the @mentioned user';
 
   static run(bot, message, args) {
-    Admincheck.run(message);
+    if (!this.adminCheck(message)) return;
     message.delete(0);
 
     let mentionedUser = message.mentions.users.first();

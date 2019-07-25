@@ -1,4 +1,4 @@
-import GetPlayerStats from '../../modules/getplayerstats';
+import getPlayerStats from '../../modules/getplayerstats';
 
 export default class Compare {
   static name = 'compare';
@@ -10,14 +10,13 @@ export default class Compare {
     const secondUser = args[1];
 
     if (firstUser && secondUser) {
-      Promise.all([
-        GetPlayerStats.run(firstUser),
-        GetPlayerStats.run(secondUser),
-      ]).then(promise => {
-        console.log(promise);
+      Promise.all([getPlayerStats(firstUser), getPlayerStats(secondUser)]).then(
+        promise => {
+          console.log(promise);
 
-        message.channel.send(promise);
-      });
+          message.channel.send(promise);
+        }
+      );
     } else {
       message.channel.send('I need 2 users if I want to compare them');
     }
