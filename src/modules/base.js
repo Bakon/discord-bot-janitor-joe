@@ -15,9 +15,16 @@ export default class Base {
   }
 
   static makeTable(rows, header) {
+    if (!rows || rows.length === 0) return 'no data provided :/';
+
+    header = header ? ` ${header} ` : '';
+
     const columnLengths = rows[0].map((column, index) => {
       return Math.max(...rows.map(row => row[index].length));
     });
+
+    if (columnLengths.length < 2)
+      columnLengths[0] = Math.max(columnLengths[0], header.length - 2);
 
     const table = rows.map(row => {
       const stringyRow = row
@@ -28,10 +35,11 @@ export default class Base {
       return `\`| ${stringyRow} |\``;
     });
 
-    header = header ? ` ${header} ` : '';
-    const rowLength = table[0].length - 4;
+    const rowLength = Math.max(0, table[0].length - 4);
 
-    table.unshift(`\`+${header}${'-'.repeat(rowLength - header.length)}+\``);
+    table.unshift(
+      `\`+${header}${'-'.repeat(Math.max(0, rowLength - header.length))}+\``
+    );
     table.push(`\`+${'-'.repeat(rowLength)}+\``);
 
     return table.join('\n');
