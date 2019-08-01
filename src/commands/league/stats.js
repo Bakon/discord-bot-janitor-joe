@@ -9,13 +9,14 @@ export default class Stats extends Base {
   static run(bot, message, args) {
     const input = args.join('+');
     getPlayerStats(input).then(user => {
+      const table = user.seasons.map(({season, tier, rank, leaguePoints}) => [
+        season === null ? 'Current' : `Season ${season}`,
+        `${tier} ${rank || ''}`.trim(),
+        `${leaguePoints}LP`,
+      ]);
+
       message.channel.send(
-        '\u200b\n' +
-          this.makeTable(
-            [['hello', 'hello'], ['hello', 'hello']],
-            user.username
-          ) +
-          '\n'
+        '\u200b\n' + this.makeTable(table, user.username) + '\n'
       );
     });
   }

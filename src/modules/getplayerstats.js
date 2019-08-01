@@ -6,46 +6,55 @@ export default function getPlayerStats(searchQuery) {
     .then(res => res.text())
     .then(html => {
       const parsedHTML = parse(html);
-      const username = parsedHTML.querySelector('.Profile .Name').rawText;
+      const usernameElement = parsedHTML.querySelector('.Profile .Name');
+      const username = usernameElement && usernameElement.rawText;
       const user = {
         username,
         seasons: [],
       };
 
-      parsedHTML.querySelectorAll('.PastRankList li').forEach(li => {
+      (parsedHTML.querySelectorAll('.PastRankList li') || []).forEach(li => {
+        // eslint-disable-next-line no-unused-vars
         const [_, tier, rank, leaguePoints] =
           /^(\w+)(?: (\d+)(?: (\d+))?)?/g.exec(
             li.attributes.title || li.rawText.trim().slice(3)
           ) || [];
         const seasonElement = li.querySelector('b');
+        const finalTier = (tier || 'unranked').toLowerCase().trim();
 
         user.seasons.push({
           season: seasonElement
             ? parseInt(seasonElement.rawText.substr(1, 1))
             : -1,
-          tier: (tier || 'unknown').toLowerCase(),
-          rank: parseInt(rank) || 4,
-          leaguePoints: parseInt(leaguePoints) || 0,
+          tier: finalTier,
+          rank: finalTier === 'unranked' ? null : parseInt(rank || 4),
+          leaguePoints: parseInt(leaguePoints || 0),
         });
       });
 
+      const leaguePointsElement = parsedHTML.querySelector('.LeaguePoints');
+      const tierAndRankElement = parsedHTML.querySelector('.TierRank');
+
       const leaguePoints =
-        parsedHTML.querySelector('.LeaguePoints') !== null
-          ? parsedHTML.querySelector('.LeaguePoints').innerHTML.trim()
+        leaguePointsElement !== null
+          ? leaguePointsElement.innerHTML.trim()
           : '0';
 
-      const [currentTier, currentRank] = parsedHTML
-        .querySelector('.TierRank')
-        .innerHTML.toLowerCase()
-        .split(' ');
+      const [currentTier, currentRank] =
+        tierAndRankElement !== null
+          ? tierAndRankElement.innerHTML.toLowerCase().split(' ')
+          : ['unranked', ''];
 
       user.seasons.push({
         season: null,
-        tier: currentTier,
-        rank: parseInt(currentRank),
+        tier: currentTier.trim(),
+        rank: parseInt(currentRank) || null,
         leaguePoints: parseInt(leaguePoints),
       });
 
-      return user;
+      const latest = Math.max(...user.seasons.map(({season}) => season)) + 1;
+      user.seasons.sort((a, b) => (b.season || latest) - (a.season || latest));
+
+      return Object.freeze(user);
     });
 }
