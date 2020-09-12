@@ -17,7 +17,7 @@
     "discord.js": "^11.5.1",
     "ffmpeg-binaries": "^4.0.0",
     "glob": "^7.1.4",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "node-html-parser": "^1.1.16",
     "node-opus": "^0.3.2",
     "ytdl-core": "^0.29.3"
